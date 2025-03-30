@@ -1,0 +1,82 @@
+Step 1 :
+To download Telco generator "Download the phone call event generator app, TelcoGenerator.zip"
+https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-real-time-fraud-detection
+
+Step 2 :
+Create Event hub in azure :
+So, it will first ask to create event name space :  
+Fill the all detail 
+Pricing must be basic(because of practicing)
+Throughput : same as DTU, more througput unit means fast stream analysis
+
+Step 3 : 
+Event hub name spaces created from anove step, now create eevent hub.
+Click on +Event Hub
+Event hub will be display at the bottom of event name space window Once event hub created. 
+
+Step 4 : 
+create policy : Setting --> Shared access policy --> Add
+Dl-policy : check "Manage" --> Create
+You will get all policy detail once policy created like Primary key,Secondary key,Primary connection string,Secondary connection string,SAS policy ARM ID
+
+Step 5 : 
+Now open Telcodatagen.exe.congfig placed at Telcogenerator folder
+Now copy EventHub name & Primay connection string from policy and paste it into Telcodatagen.exe.congfig file.
+While pasting Primary connection string, removed ";EntityPath=dl-event-hub" from the string and paste at Telcodatagen.exe.congfig
+Save Telcodatagen.exe.congfig
+
+Step 6 : 
+Now open Telcodatagen.exe.congfig path where this file stored at cmd by below method : 
+open cmd and enter : cd path
+OR
+Go to the url of path and type cmd at url, it will redirect to command prompt.
+Now write below code to generate stream/live data.
+telcodatagen 1000 0.2 2
+to stop the data generation , press ctl+c.
+
+Step 7: 
+Now create Stream Analytics Jobs in azure
+Hosting environment  : Cloud Vs Edge
+Cloud (Azure): In this environment, data is processed in real-time from various input sources (such as Event Hubs, IoT Hub, Blob Storage, etc.) and outputs can be sent to various destinations (such as Azure SQL Database, Power BI, Data Lake, etc.). Source : Software
+Edge (IoT Edge): In this hosting environment, Stream Analytics jobs are deployed and run on devices that are part of the Azure IoT Edge ecosystem. Source : Hardware
+Storage : optional check/uncheck
+Now goto Job topology :
+input : Source (path of event hub)
+Query : like ADF
+output : Destination
+
+Create input --> input (Event hub)--> Input alias--> Event Hub namespace-->Event Hub policy name-->Save
+click on test connection once input coneection save.
+
+once you click on Query, then automaticall data will populate at same window under Input preview 
+Click on raw to check the all columns of input data.
+
+Now you have to create table on SQL database, if you want to export some specific column then create only those column.
+for safe end, always mention varchar for all type of data.
+
+Create output -->output (SQL database)-->Output alias-->Database-->Authentication mode-->Username/pass-->load existing tables-->Select Table(created in sql)-->Save
+
+once you click on Query, then automaticall syntax will be populated at query window.
+Now if you want only selected coulmn then mention those in place of * and test the query. 
+
+once the query tested, then save it and goto overview and click on "start job" -->Job output start time "now" to store the sream data sql db.
+
+and run that telco command over cmd (for practice purpose)
+
+Step 8 :  
+now you can check that is data is coming, by just below query :
+select count(*) from Streamdata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
