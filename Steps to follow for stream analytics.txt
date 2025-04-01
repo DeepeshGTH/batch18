@@ -1,3 +1,4 @@
+Deepesh
 Step 1 :
 To download Telco generator "Download the phone call event generator app, TelcoGenerator.zip"
 https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-real-time-fraud-detection
@@ -7,10 +8,10 @@ Create Event hub in azure :
 So, it will first ask to create event name space :  
 Fill the all detail 
 Pricing must be basic(because of practicing)
-Throughput : same as DTU, more througput unit means fast stream analysis
+Throughput : same as DTU, more througput unit means fast stream 
 
 Step 3 : 
-Event hub name spaces created from anove step, now create eevent hub.
+Event hub name spaces created from anove step, now create eevent bub.
 Click on +Event Hub
 Event hub will be display at the bottom of event name space window Once event hub created. 
 
